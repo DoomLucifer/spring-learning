@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:c="http://www.springframework.org/schema/c" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <!--<context:component-scan base-package="com.doom.lucifer.chapter1.soundsystem"/>-->
+    <!-- 默认id：com.doom.lucifer.chapter1.soundsystem.SgtPeppers#0 -->
+    <bean id="sgtPeppers" class="com.doom.lucifer.chapter1.soundsystem.SgtPeppers"/>
+
+    <bean id="cdPlayer" class="com.doom.lucifer.chapter1.soundsystem.CDPlayer">
+        <constructor-arg ref="sgtPeppers"/>
+    </bean>
+
+    <bean id="cdPlayer2" class="com.doom.lucifer.chapter1.soundsystem.CDPlayer"
+          c:cd-ref="sgtPeppers"/>
+
+    <bean id="cdPlayer3" class="com.doom.lucifer.chapter1.soundsystem.CDPlayer">
+        <property name="cd" ref="sgtPeppers"/>
+        <property name="compactDisc" ref="sgtPeppers"/>
+    </bean>
+
+    <!--<bean id="blankDisc" class="com.doom.lucifer.chapter1.soundsystem.BlankDisc"-->
+          <!--c:_0="Sgt. Pepper's Lonely Hearts Club Band"-->
+          <!--c:_1="The Beatles"/>-->
+
+    <!--<bean id="blankDisc1" class="com.doom.lucifer.chapter1.soundsystem.BlankDisc"-->
+          <!--c:title="Sgt. Pepper's Lonely Hearts Club Band"-->
+          <!--c:artist="The Beatles"/>-->
+    <bean id="blankDisc" class="com.doom.lucifer.chapter1.soundsystem.BlankDisc">
+        <constructor-arg value="Sgt. Pepper's Lonely Hearts Club Band"/>
+        <constructor-arg value="The Beatles"/>
+        <!--<constructor-arg><null/></constructor-arg>-->
+        <constructor-arg>
+            <list>
+                <value>Sgt. Pepper's Lonely Hearts Club Band</value>
+                <!--<ref bean="sgtPeppers"/>-->
+            </list>
+        </constructor-arg>
+        <constructor-arg>
+            <set>
+                <value>Sgt. Pepper's Lonely Hearts Club Band</value>
+            </set>
+        </constructor-arg>
+    </bean>
+
+    <util:list id="trackList">
+        <value>Sgt. Pepper's Lonely Hearts Club Band</value>
+    </util:list>
+
+</beans>
